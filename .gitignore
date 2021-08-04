@@ -1,0 +1,9 @@
+assets*
+bin*
+Debug*
+include/SDL*
+lib*
+tetris.mk
+tetris.project
+tetris.txt
+compile_flags.txt
