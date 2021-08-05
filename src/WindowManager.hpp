@@ -6,13 +6,15 @@
 #include <string>
 //Project specific include
 #include "Logger.hpp"
+#include "SDL_Exception.hpp"
 
 class WindowManager
 {
 public:
     WindowManager();
     ~WindowManager();
-    bool Initialize();
+    void Initialize();
+    std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)> SummonRenderer();
     
 private:
     //Constants

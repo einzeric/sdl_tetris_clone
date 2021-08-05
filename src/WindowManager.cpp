@@ -15,14 +15,13 @@ WindowManager::~WindowManager()
     SDL_Quit();
 }
 
-bool WindowManager::Initialize()
+void WindowManager::Initialize()
 {
     //Initialize SDL system
-    if(SDL_Init(SDL_INIT_VIDEO) < 0)
+    if(SDL_Init(SDL_INIT_EVERYTHING) < 0)
     {
-        Logger::LOG_E("Failed to initalize SDL with error:");
-        Logger::LOG_E(SDL_GetError());
-        return FAIL;
+        Logger::LOG_E("Failed to initalize SDL.");
+        throw SDL_Exception();
     }
     else
     {
@@ -31,17 +30,19 @@ bool WindowManager::Initialize()
         mWindow = std::unique_ptr<SDL_Window, decltype(&SDL_DestroyWindow)>(SDL_CreateWindow(WINDOW_NAME.c_str(),
                                                                                                 SDL_WINDOWPOS_UNDEFINED,
                                                                                                 SDL_WINDOWPOS_UNDEFINED,
-                                                                                                WINDOW_WIDTH,
-                                                                                                WINDOW_HEIGHT,
+                                                                                                20000,
+                                                                                                20000,
                                                                                                 SDL_WINDOW_SHOWN),
                                                                             SDL_DestroyWindow);
         if(!mWindow)
         {
-            Logger::LOG_E("Window creation failed with error:");
-            Logger::LOG_E(SDL_GetError());
-            return FAIL;
+            Logger::LOG_E("Window creation failed.");
+            throw SDL_Exception();
         }
     }
+}
+
+std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)> SummonRenderer()
+{
     
-    return SUCC;
 }

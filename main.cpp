@@ -3,13 +3,14 @@
 int main(int argc, char* args[])
 {
     WindowManager iWindowManager;
-    if(!iWindowManager.Initialize())
+    try
     {
-        Logger::LOG_E("Failed to start game");
+        iWindowManager.Initialize();
     }
-    else
+    catch(SDL_Exception& e)
     {
-        Logger::LOG_I("Game running.");
+        Logger::LOG_E("Exception in program:");
+        Logger::LOG_E(e.what());
     }
 	return 0;
 }
