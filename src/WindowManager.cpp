@@ -30,8 +30,8 @@ void WindowManager::Initialize()
         mWindow = std::unique_ptr<SDL_Window, decltype(&SDL_DestroyWindow)>(SDL_CreateWindow(WINDOW_NAME.c_str(),
                                                                                                 SDL_WINDOWPOS_UNDEFINED,
                                                                                                 SDL_WINDOWPOS_UNDEFINED,
-                                                                                                20000,
-                                                                                                20000,
+                                                                                                WINDOW_WIDTH,
+                                                                                                WINDOW_HEIGHT,
                                                                                                 SDL_WINDOW_SHOWN),
                                                                             SDL_DestroyWindow);
         if(!mWindow)
