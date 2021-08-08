@@ -14,7 +14,7 @@ public:
     WindowManager();
     ~WindowManager();
     void Initialize();
-    std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)> SummonRenderer();
+    std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)> SummonRenderer(int driverIndex, Uint32 renderFlag);
     
 private:
     //Constants

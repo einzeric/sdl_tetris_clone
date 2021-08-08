@@ -42,7 +42,13 @@ void WindowManager::Initialize()
     }
 }
 
-std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)> SummonRenderer()
+std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)> WindowManager::SummonRenderer(int driverIndex, Uint32 renderFlag)
 {
-    
+    if(!mWindow)
+    {
+        Logger::LOG_E("Error! Window not initialized!");
+        return std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)>(nullptr, SDL_DestroyRenderer);
+    }
+    Logger::LOG_I("Summoning Diabl... I mean renderer!");
+    return std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)>(SDL_CreateRenderer(mWindow.get(), driverIndex, renderFlag), SDL_DestroyRenderer);
 }
